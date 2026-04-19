@@ -1,0 +1,110 @@
+
+
+body {
+    background-color: #f4fdf4; 
+    font-family: 'Georgia', 'Times New Roman', serif; 
+    color: #2e3d2e;
+    line-height: 1.8; 
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2e7d32; 
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 6px dashed #1b5e20; 
+}
+
+header h1 {
+    margin: 0 0 15px 0;
+    font-style: italic;
+}
+
+button {
+    background-color: #2e7d32;
+    color: white;
+    border: 2px solid #1b5e20;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px; 
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #4caf50;
+}
+
+main {
+    max-width: 800px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
+
+section {
+    background: white;
+    margin-bottom: 25px;
+    padding: 25px;
+    border: 2px dashed #4caf50; 
+    border-radius: 15px; 
+    box-shadow: 6px 6px 0px #a5d6a7; 
+}
+
+h2 {
+    color: #1b5e20;
+    font-style: italic;
+    border-bottom: 2px dashed #c8e6c9;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+h3 {
+    color: #2e7d32;
+}
+
+a {
+    color: #2e7d32;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #1b5e20;
+}
+
+
+img {
+    border: 4px dashed #2e7d32;
+    border-radius: 50%; 
+    display: block;
+    margin-bottom: 15px;
+}
+/* STYLE FORMULARZA (Zadanie 5) */
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+.error-msg {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: none; /* Domyślnie ukryte */
+}
+.input-error {
+    border: 2px solid red !important;
+    background-color: #ffeeee;
+}
