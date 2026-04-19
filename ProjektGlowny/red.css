@@ -79,3 +79,29 @@ img {
     display: block;
     margin-bottom: 10px;
 }
+/* STYLE FORMULARZA (Zadanie 5) */
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+.error-msg {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: none; /* Domyślnie ukryte */
+}
+.input-error {
+    border: 2px solid red !important;
+    background-color: #ffeeee;
+}

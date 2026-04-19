@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Zakhar Zavodianskyi</title>
+    <title>CV - Zakhar Zavodianskyi - PL77337</title>
     <link id="theme-link" rel="stylesheet" href="red.css">
-
 </head>
 <body>
     <header>
         <h1>Zakhar Zavodianskyi</h1>
-        <button id="theme-btn">Zmień motyw</button>
-        <button id="toggle-section-btn">Ukryj sekcję Umiejętności</button>
+        <p>Numer albumu: <strong>PL77337</strong></p>
+        
+        <div style="margin: 20px 0;">
+            <button id="theme-btn">Zmień motyw (Czerwony/Zielony)</button>
+            <button id="toggle-section-btn">Ukryj/Pokaż sekcję Umiejętności</button>
+        </div>
     </header>
 
     <main>
@@ -45,35 +48,51 @@
         </section>
 
         <section>
-            <h2>Doświadczenie</h2>
-            <article>
-                <h3>Własne projekty</h3>
-                <p>Tworzenie prostych aplikacji w języku C# i projektów bazodanowych.</p>
-            </article>
-            <article>
-                <h3>Modelowanie</h3>
-                <p>Tworzenie modeli 3D w programie Blender, w tym tekstury i oświetlenie.</p>
-            </article>
-        </section>
-
-        <section>
-            <h2>Edukacja</h2>
-            <p><strong>Akademia Finansów i Biznesu Vistula </strong> - Informatyka - studia 1 stopnia (W trakcie)</p>
-            <p>Numer albumu: PL77337</p>
-            <p><strong>ITSTEP academy </strong> - Kursy programowania i technologii informacyjnych</p>
-        </section>
-
-        <section>
-            <h2>Projekty</h2>
+            <h2>Edukacja i Projekty</h2>
+            <p><strong>Akademia Finansów i Biznesu Vistula</strong> - Informatyka (W trakcie)</p>
             <ul>
-                <li><strong>Symulator Bankomatu:</strong> Aplikacja okienkowa stworzona w języku C# (Windows Forms), symulująca podstawowe operacje bankowe.</li>
-                <li><strong>Baza danych dla uczelni:</strong> Projekt obejmujący projektowanie i optymalizację zapytań SQL do zarządzania danymi.</li>
+                <li><strong>Symulator Bankomatu (C#)</strong></li>
+                <li><strong>Baza danych dla uczelni (SQL)</strong></li>
             </ul>
+        </section>
+        /* zadanie 5  */
+        <section id="form-section"> 
+            <h2>Napisz do mnie</h2>
+            <form id="contactForm" novalidate>
+                <div class="form-group">
+                    <label for="firstName">Imię:</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Wpisz imię">
+                    <div class="error-msg" id="error-firstName"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Wpisz nazwisko">
+                    <div class="error-msg" id="error-lastName"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="np. jan@kowalski.pl">
+                    <div class="error-msg" id="error-email"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Wiadomość:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Twoja wiadomość..."></textarea>
+                    <div class="error-msg" id="error-message"></div>
+                </div>
+
+                <button type="submit" id="submitBtn">Wyślij wiadomość</button>
+                <div id="success-msg" style="display: none; color: green; font-weight: bold; margin-top: 15px;">
+                    Wiadomość została poprawnie zwalidowana i "wysłana"!
+                </div>
+            </form>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Zakhar Zavodianskyi.</p>
+        <p>&copy; 2026 Zakhar Zavodianskyi. Indeks: PL77337</p>
     </footer>
 
     <script src="script.js"></script>
