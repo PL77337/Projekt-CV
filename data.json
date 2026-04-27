@@ -1,0 +1,19 @@
+{
+  "umiejetnosci": [
+    "Język C# - podstawy",
+    "Bazy danych i język SQL - podstawy",
+    "Modelowanie w Blender",
+    "Diagnozowanie i rozwiązywanie problemów sprzętowych PC",
+    "Język angielski (w tym słownictwo biznesowe)"
+  ],
+  "projekty": [
+    {
+      "tytul": "Symulator Bankomatu (C#)",
+      "opis": "Aplikacja okienkowa stworzona w języku C# (Windows Forms), symulująca podstawowe operacje bankowe."
+    },
+    {
+      "tytul": "Baza danych dla uczelni",
+      "opis": "Projekt obejmujący projektowanie i optymalizację zapytań SQL do zarządzania danymi."
+    }
+  ]
+}

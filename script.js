@@ -101,3 +101,55 @@ contactForm.addEventListener('submit', function(event) {
         contactForm.reset(); // Czyścimy formularz
     }
 });
+
+// ZADANIE 6 - Pobieranie danych z pliku JSON
+
+
+// Funkcja asynchroniczna do pobierania danych
+async function loadDataFromJSON() {
+    try {
+        // 1. Wysyłamy zapytanie o plik
+        const response = await fetch('data.json');
+        
+        // Sprawdzamy czy plik istnieje
+        if (!response.ok) {
+            throw new Error('Błąd pobierania danych z pliku JSON');
+        }
+
+        // 2. Tłumaczymy odpowiedź na obiekt JavaScript
+        const data = await response.json();
+
+        // 3. Budujemy sekcję "Umiejętności"
+        const skillsContainer = document.getElementById('skills-container');
+        skillsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
+        
+        const ulSkills = document.createElement('ul');
+        data.umiejetnosci.forEach(skill => {
+            const li = document.createElement('li');
+            li.textContent = skill;
+            ulSkills.appendChild(li);
+        });
+        skillsContainer.appendChild(ulSkills);
+
+        // 4. Budujemy sekcję "Projekty"
+        const projectsContainer = document.getElementById('projects-container');
+        projectsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
+        
+        const ulProjects = document.createElement('ul');
+        data.projekty.forEach(projekt => {
+            const li = document.createElement('li');
+            // Używamy innerHTML bo chcemy pogrubić tytuł za pomocą tagu <strong>
+            li.innerHTML = `<strong>${projekt.tytul}</strong>: ${projekt.opis}`;
+            ulProjects.appendChild(li);
+        });
+        projectsContainer.appendChild(ulProjects);
+
+    } catch (error) {
+        console.error('Błąd zadania 6:', error);
+        document.getElementById('skills-container').textContent = 'Nie udało się załadować umiejętności.';
+        document.getElementById('projects-container').textContent = 'Nie udało się załadować projektów.';
+    }
+}
+
+// Uruchamiamy funkcję od razu po załadowaniu skryptu
+loadDataFromJSON();
