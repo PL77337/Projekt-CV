@@ -1,5 +1,9 @@
 // Numer albumu: PL77337
 
+// ==========================================
+// ZADANIE 4 - Zmiana motywu i pokazywanie sekcji
+// ==========================================
+
 // 1.(Czerwony / Zielony)
 const themeBtn = document.getElementById('theme-btn');
 const themeLink = document.getElementById('theme-link');
@@ -25,6 +29,7 @@ toggleBtn.addEventListener('click', function() {
         toggleBtn.textContent = 'Pokaż sekcję Umiejętności';
     }
 });
+
 // ==========================================
 // ZADANIE 5 - Walidacja formularza
 // ==========================================
@@ -102,8 +107,9 @@ contactForm.addEventListener('submit', function(event) {
     }
 });
 
+// ==========================================
 // ZADANIE 6 - Pobieranie danych z pliku JSON
-
+// ==========================================
 
 // Funkcja asynchroniczna do pobierania danych
 async function loadDataFromJSON() {
@@ -120,7 +126,8 @@ async function loadDataFromJSON() {
         const data = await response.json();
 
         // 3. Budujemy sekcję "Umiejętności"
-        const skillsContainer = document.getElementById('skills-container');
+        // ZMIENIONO: skills-container -> skills-list
+        const skillsContainer = document.getElementById('skills-list'); 
         skillsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
         
         const ulSkills = document.createElement('ul');
@@ -132,7 +139,8 @@ async function loadDataFromJSON() {
         skillsContainer.appendChild(ulSkills);
 
         // 4. Budujemy sekcję "Projekty"
-        const projectsContainer = document.getElementById('projects-container');
+        // ZMIENIONO: projects-container -> projects-list
+        const projectsContainer = document.getElementById('projects-list'); 
         projectsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
         
         const ulProjects = document.createElement('ul');
@@ -146,8 +154,9 @@ async function loadDataFromJSON() {
 
     } catch (error) {
         console.error('Błąd zadania 6:', error);
-        document.getElementById('skills-container').textContent = 'Nie udało się załadować umiejętności.';
-        document.getElementById('projects-container').textContent = 'Nie udało się załadować projektów.';
+        // ZMIENIONO: obsługa błędów też musi wskazywać na właściwe ID
+        document.getElementById('skills-list').textContent = 'Nie udało się załadować umiejętności.';
+        document.getElementById('projects-list').textContent = 'Nie udało się załadować projektów.';
     }
 }
 
