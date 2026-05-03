@@ -48,6 +48,19 @@
             <div id="projects-list">Ładowanie danych...</div>
         </section>
 
+        <!-- ZADANIE 7: Sekcja Notatek z Local Storage -->
+        <section id="notes-section">
+            <h2>Notatki dla rekrutera (Local Storage)</h2>
+            <p>Tutaj możesz zapisać swoje uwagi. Zostaną one zapamiętane w Twojej przeglądarce!</p>
+            
+            <div class="form-group" style="display: flex; gap: 10px;">
+                <input type="text" id="note-input" placeholder="Wpisz notatkę..." style="flex-grow: 1;">
+                <button id="add-note-btn">Dodaj</button>
+            </div>
+            
+            <ul id="notes-list" style="list-style-type: none; padding: 0;"></ul>
+        </section>
+
         <section id="form-section"> 
             <h2>Napisz do mnie</h2>
             <form id="contactForm" novalidate>

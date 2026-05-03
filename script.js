@@ -1,32 +1,47 @@
 // Numer albumu: PL77337
 
 // ==========================================
-// ZADANIE 4 - Zmiana motywu i pokazywanie sekcji
+// ZADANIE 4 i 7 - Zmiana motywu i pokazywanie sekcji (z LocalStorage)
 // ==========================================
 
-// 1.(Czerwony / Zielony)
+// --- 1. Zmiana motywu (Czerwony / Zielony) ---
 const themeBtn = document.getElementById('theme-btn');
 const themeLink = document.getElementById('theme-link');
 
+// Sprawdzamy przy ładowaniu, czy w localStorage jest już zapisany jakiś motyw
+const savedTheme = localStorage.getItem('cv-theme');
+if (savedTheme) {
+    themeLink.setAttribute('href', savedTheme);
+}
+
 themeBtn.addEventListener('click', function() {
-    if (themeLink.getAttribute('href') === 'red.css') {
-        themeLink.setAttribute('href', 'green.css');
-    } else {
-        themeLink.setAttribute('href', 'red.css');
-    }
+    let currentTheme = themeLink.getAttribute('href');
+    let newTheme = currentTheme === 'red.css' ? 'green.css' : 'red.css';
+    
+    themeLink.setAttribute('href', newTheme);
+    localStorage.setItem('cv-theme', newTheme); // Zapisujemy wybór użytkownika
 });
 
-// 2.(Ukrycie i pokazanie sekcji "Umiejętności")
+// --- 2. Ukrycie i pokazanie sekcji "Umiejętności" ---
 const toggleBtn = document.getElementById('toggle-section-btn');
 const skillsSection = document.getElementById('skills-section');
+
+// Sprawdzamy przy ładowaniu, czy użytkownik wcześniej ukrył sekcję
+const isSkillsHidden = localStorage.getItem('cv-skills-hidden');
+if (isSkillsHidden === 'true') {
+    skillsSection.style.display = 'none';
+    toggleBtn.textContent = 'Pokaż sekcję Umiejętności';
+}
 
 toggleBtn.addEventListener('click', function() {
     if (skillsSection.style.display === 'none') {
         skillsSection.style.display = 'block';
         toggleBtn.textContent = 'Ukryj sekcję Umiejętności';
+        localStorage.setItem('cv-skills-hidden', 'false'); // Zapisujemy stan
     } else {
         skillsSection.style.display = 'none';
         toggleBtn.textContent = 'Pokaż sekcję Umiejętności';
+        localStorage.setItem('cv-skills-hidden', 'true'); // Zapisujemy stan
     }
 });
 
@@ -111,24 +126,19 @@ contactForm.addEventListener('submit', function(event) {
 // ZADANIE 6 - Pobieranie danych z pliku JSON
 // ==========================================
 
-// Funkcja asynchroniczna do pobierania danych
 async function loadDataFromJSON() {
     try {
-        // 1. Wysyłamy zapytanie o plik
         const response = await fetch('data.json');
         
-        // Sprawdzamy czy plik istnieje
         if (!response.ok) {
             throw new Error('Błąd pobierania danych z pliku JSON');
         }
 
-        // 2. Tłumaczymy odpowiedź na obiekt JavaScript
         const data = await response.json();
 
-        // 3. Budujemy sekcję "Umiejętności"
-        // ZMIENIONO: skills-container -> skills-list
+        // Umiejętności
         const skillsContainer = document.getElementById('skills-list'); 
-        skillsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
+        skillsContainer.innerHTML = ''; 
         
         const ulSkills = document.createElement('ul');
         data.umiejetnosci.forEach(skill => {
@@ -138,15 +148,13 @@ async function loadDataFromJSON() {
         });
         skillsContainer.appendChild(ulSkills);
 
-        // 4. Budujemy sekcję "Projekty"
-        // ZMIENIONO: projects-container -> projects-list
+        // Projekty
         const projectsContainer = document.getElementById('projects-list'); 
-        projectsContainer.innerHTML = ''; // Czyścimy napis "Ładowanie..."
+        projectsContainer.innerHTML = ''; 
         
         const ulProjects = document.createElement('ul');
         data.projekty.forEach(projekt => {
             const li = document.createElement('li');
-            // Używamy innerHTML bo chcemy pogrubić tytuł za pomocą tagu <strong>
             li.innerHTML = `<strong>${projekt.tytul}</strong>: ${projekt.opis}`;
             ulProjects.appendChild(li);
         });
@@ -154,11 +162,75 @@ async function loadDataFromJSON() {
 
     } catch (error) {
         console.error('Błąd zadania 6:', error);
-        // ZMIENIONO: obsługa błędów też musi wskazywać na właściwe ID
         document.getElementById('skills-list').textContent = 'Nie udało się załadować umiejętności.';
         document.getElementById('projects-list').textContent = 'Nie udało się załadować projektów.';
     }
 }
 
-// Uruchamiamy funkcję od razu po załadowaniu skryptu
 loadDataFromJSON();
+
+// ==========================================
+// ZADANIE 7 - Local Storage (Lista notatek dla rekrutera)
+// ==========================================
+
+const noteInput = document.getElementById('note-input');
+const addNoteBtn = document.getElementById('add-note-btn');
+const notesList = document.getElementById('notes-list');
+
+// Pobieramy notatki (lub tworzymy pustą tablicę)
+let notes = JSON.parse(localStorage.getItem('cv-notes')) || [];
+
+function renderNotes() {
+    notesList.innerHTML = ''; // Czyścimy listę przed nowym rysowaniem
+
+    notes.forEach((note, index) => {
+        const li = document.createElement('li');
+        // Stylowanie notatki bezpośrednio w JS
+        li.style.background = '#f9f9f9';
+        li.style.border = '1px solid #ccc';
+        li.style.margin = '5px 0';
+        li.style.padding = '8px 12px';
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.alignItems = 'center';
+        li.style.borderRadius = '4px';
+        li.style.color = '#333'; // ciemny tekst zawsze czytelny
+
+        const span = document.createElement('span');
+        span.textContent = note;
+
+        // Przycisk usunięcia
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Usuń';
+        deleteBtn.style.background = '#d32f2f'; // Czerwony kolor
+        deleteBtn.style.color = 'white';
+        deleteBtn.style.border = 'none';
+        deleteBtn.style.padding = '5px 10px';
+        deleteBtn.style.borderRadius = '4px';
+        deleteBtn.style.cursor = 'pointer';
+        
+        deleteBtn.addEventListener('click', function() {
+            notes.splice(index, 1); // Usuwamy element z tablicy
+            localStorage.setItem('cv-notes', JSON.stringify(notes)); // Nadpisujemy pamięć
+            renderNotes(); // Odświeżamy widok
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        notesList.appendChild(li);
+    });
+}
+
+addNoteBtn.addEventListener('click', function() {
+    const newNote = noteInput.value.trim(); 
+    
+    if (newNote !== '') {
+        notes.push(newNote); // Dodajemy do tablicy
+        localStorage.setItem('cv-notes', JSON.stringify(notes)); // Zapisujemy
+        noteInput.value = ''; // Czyścimy pole
+        renderNotes(); // Odświeżamy widok
+    }
+});
+
+// Uruchamiamy rysowanie na starcie, by pokazać zapisane notatki
+renderNotes();
